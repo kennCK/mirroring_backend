@@ -21,6 +21,7 @@ class AccountController extends MirroringController
 
     public function create(Request $request){
       $request = $request->all();
+      $request['account_type'] = 'USER';
       $request['password'] = Hash::make($request['password']);
       $this->insertDB($request);
       return $this->response();
