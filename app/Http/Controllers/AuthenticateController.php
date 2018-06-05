@@ -44,10 +44,10 @@ class AuthenticateController extends Controller
     $credentials = null;
     $result = null;
     if($this->customValidate($text) == true){        
-      $credentials = array("email" => $data['username'], 'password' => $data['password'], 'status' => $data['status']);
+      $credentials = array("email" => $data['username'], 'password' => $data['password']);
       $result = Account::where('email', '=', $data['username'])->get();
     }else{
-      $credentials = array("username" => $data['username'], 'password' => $data['password'], 'status' => $data['status']);
+      $credentials = array("username" => $data['username'], 'password' => $data['password']);
       $result = Account::where('username', '=', $data['username'])->get();
     }
     try {

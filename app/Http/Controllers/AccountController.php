@@ -26,4 +26,18 @@ class AccountController extends MirroringController
       $this->insertDB($request);
       return $this->response();
     }
+
+    public function loginMobile(Request $request){
+      $request = $request->all();
+      $result = Account::where('username', '=', $request['username'])->get();
+      if(sizeof($result) > 0){
+        if(Hash::check($request['password'], $result[0]['password'])){
+          return response()->json(array('data' => $result[0], 'message' => null));
+        }else{
+          return response()->json(array('data' => null, 'message' => 'Invalid Credentials'));
+        }
+      }else{
+        return response()->json(array('data' => null, 'message' => 'Invalid Credentials'));
+      }
+    }
 }

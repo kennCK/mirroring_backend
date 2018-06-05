@@ -81,4 +81,5 @@ Route::post('/accounts/create', "AccountController@create");
 Route::post('/accounts/retrieve', "AccountController@retrieve");
 Route::post('/accounts/update', "AccountController@update");
 Route::post('/accounts/delete', "AccountController@delete");
+Route::post('/accounts/login_mobile', "AccountController@loginMobile");
 
