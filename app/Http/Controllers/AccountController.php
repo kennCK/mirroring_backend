@@ -32,12 +32,12 @@ class AccountController extends MirroringController
       $result = Account::where('username', '=', $request['username'])->get();
       if(sizeof($result) > 0){
         if(Hash::check($request['password'], $result[0]['password'])){
-          return response()->json(array('data' => $result, 'message' => null));
+          return json_encode(array('data' => $result, 'message' => null));
         }else{
-          return response()->json(array('data' => null, 'message' => 'Invalid Credentials'));
+          return json_encode(array('data' => null, 'message' => 'Invalid Credentials'));
         }
       }else{
-        return response()->json(array('data' => null, 'message' => 'Invalid Credentials'));
+        return json_encode(array('data' => null, 'message' => 'Invalid Credentials'));
       }
     }
 }
