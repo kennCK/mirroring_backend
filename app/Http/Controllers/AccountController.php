@@ -24,7 +24,11 @@ class AccountController extends MirroringController
       $request['account_type'] = 'USER';
       $request['password'] = Hash::make($request['password']);
       $this->insertDB($request);
-      return $this->response();
+      if($this->response['data'] > 0){
+        return json_encode(array('data' => $this->response['data']));
+      }else{
+        return json_encode(array('data' => null));
+      }
     }
 
     public function loginMobile(Request $request){
