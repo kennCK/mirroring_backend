@@ -14,6 +14,7 @@ class RecordController extends MirroringController
     public function create(Request $request){
     	$request = $request->all();
     	$request['code'] = $this->generateCode();
+    	
     	$this->insertDB($request);
     	if($this->response['data'] > 0){
     		return json_encode(array('data' => $this->response['data']));

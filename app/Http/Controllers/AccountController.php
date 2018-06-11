@@ -24,6 +24,7 @@ class AccountController extends MirroringController
       $request['account_type'] = 'USER';
       $request['password'] = Hash::make($request['password']);
       $this->insertDB($request);
+      
       if($this->response['data'] > 0){
         return json_encode(array('data' => $this->response['data']));
       }else{
