@@ -88,7 +88,7 @@ Route::post('/accounts/login_mobile', "AccountController@loginMobile");
 //Accounts
 Route::post('/records/create', "RecordController@create");
 Route::post('/records/retrieve', "RecordController@retrieve");
-Route::post('/records/retrieve', "RecordController@retrieveMobile");
+Route::post('/records/retrieve_mobile', "RecordController@retrieveMobile");
 Route::post('/records/update', "RecordController@update");
 Route::post('/records/delete', "RecordController@delete");
 
