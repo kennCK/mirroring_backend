@@ -34,7 +34,7 @@ class RecordController extends MirroringController
 
     public function generateCode(){
       $code = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
-      $codeExist = Account::where('code', '=', $code)->get();
+      $codeExist = Record::where('code', '=', $code)->get();
       if(sizeof($codeExist) > 0){
         $this->generateCode();
       }else{
