@@ -22,9 +22,9 @@ class RecordController extends MirroringController
     		return json_encode(array('data' => null));
     	}
     }
-    public function retrieveMobile(Request $request){
+    public function retrieve(Request $request){
     	$request = $request->all();
-    	$result = Record::where('code', '=', $request['code'])->get();
+    	$result = Record::where($request['column'], '=', $request['value'])->get();
     	if(sizeof($result) > 0){
     		return json_encode(array('data' => $result));
     	}else{
