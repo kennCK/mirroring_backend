@@ -14,7 +14,7 @@ class RecordController extends MirroringController
 
     public function create(Request $request){
     	$data = $request->all();
-    	if(isset($data['filename'])){
+    	if($request->hasFile('pdf')){
     		$date = Carbon::now()->toDateString();
     		$time = str_replace(':', '_',Carbon::now()->toTimeString());
     		$ext 	= $request->file('pdf')->extension();
@@ -25,7 +25,7 @@ class RecordController extends MirroringController
     			'account_id'	=> $data['account_id'],
     			'type'				=> $data['type'],
     			'url'					=> '/storage/files/'.$filename,
-    			'filename' 		=> $data['filename'],
+    			'filename' 		=> $request->file('pdf')->getClientOriginalName(),
     			'code' 				=> $this->generateCode()
     		);
     		$this->insertDB($insertData);
