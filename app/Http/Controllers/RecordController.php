@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Record;
+use Carbon\Carbon;
 class RecordController extends MirroringController
 {
     function __construct(){
@@ -13,10 +14,21 @@ class RecordController extends MirroringController
 
     public function create(Request $request){
     	$request = $request->all();
-    	$request['code'] = $this->generateCode();
-    	
-    	$this->insertDB($request);
-    	if($this->response['data'] > 0){
+    	if(isset($request['filename'])){
+    		$date = Carbon::now()->toDateString();
+    		$time = str_replace(':', '_',Carbon::now()->toTimeString());
+    		$ext = $request->file('file')->extension();
+    		$filename = $request['account_id'].'_'.$date.'_'.$time.'.'.$ext;
+    		$request->file('file')->storeAs('files', $filename);
+    		$this->model = new AccountProfile();
+    		$insertData = array(
+    			'account_id'	=> $request['account_id'],
+    			'type'				=> $request['type'],
+    			'url'					=> '/storage/files/'.$filename,
+    			'filename' 		=> $request['filename'],
+    			'code' 				=> $this->generateCode()
+    		);
+    		$this->insertDB($insertData);
     		return json_encode(array('data' => $this->response['data']));
     	}else{
     		return json_encode(array('data' => null));

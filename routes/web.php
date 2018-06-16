@@ -17,9 +17,9 @@ Route::get('/', function () {
 /*
   Accessing uploaded files
 */
-Route::get('storage/profiles/{filename}', function ($filename)
+Route::get('storage/files/{filename}', function ($filename)
 {
-    $path = storage_path('/app/profiles/' . $filename);
+    $path = storage_path('/app/files/' . $filename);
 
     if (!File::exists($path)) {
         abort(404);
@@ -33,22 +33,7 @@ Route::get('storage/profiles/{filename}', function ($filename)
 
     return $response;
 });
-Route::get('storage/logo/{filename}', function ($filename)
-{
-    $path = storage_path('/app/logo/' . $filename);
 
-    if (!File::exists($path)) {
-        abort(404);
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
 Route::get('/cache', function () {
     $exitCode = Artisan::call('config:cache');
     return 'hey'.$exitCode;
