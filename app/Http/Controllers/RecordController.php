@@ -14,7 +14,7 @@ class RecordController extends MirroringController
 
     public function create(Request $request){
     	$data = $request->all();
-    	if(isset('pdf')){
+    	if(isset($data['pdf'])){
     		$date = Carbon::now()->toDateString();
     		$time = str_replace(':', '_',Carbon::now()->toTimeString());
     		$ext 	= $request->file('pdf')->extension();
