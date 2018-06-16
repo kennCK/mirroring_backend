@@ -20,7 +20,7 @@ class RecordController extends MirroringController
     		$ext 	= $request->file('pdf')->extension();
     		$filename = $data['account_id'].'_'.$date.'_'.$time.'.'.$ext;
     		$request->file('pdf')->storeAs('files', $filename);
-    		$this->model = new AccountProfile();
+    		$this->model = new Record();
     		$insertData = array(
     			'account_id'	=> $data['account_id'],
     			'type'				=> $data['type'],
