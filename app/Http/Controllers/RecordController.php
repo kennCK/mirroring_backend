@@ -34,7 +34,18 @@ class RecordController extends MirroringController
     		return json_encode(array('data' => null));
     	}
     }
+
     public function retrieve(Request $request){
+        $data = $request->all();
+        $this->model = new Record();
+        $this->retrieveDB($data);
+        if(sizeof($this->response['data']) > 0){
+           return json_encode(array('data' => $this->response['data']));
+        }else{
+            return json_encode(array('data' => $this->response['data']));
+        }
+    }
+    public function retrieveCustom(Request $request){
     	$request = $request->all();
     	$result = Record::where($request['column'], '=', $request['value'])->get();
     	if(sizeof($result) > 0){
