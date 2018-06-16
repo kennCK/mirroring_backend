@@ -31,7 +31,7 @@ class RecordController extends MirroringController
     		$this->insertDB($insertData);
     		return json_encode(array('data' => $this->response['data']));
     	}else{
-    		return json_encode(array('data' => null));
+    		return json_encode(array('data' => 'Hi!'));
     	}
     }
     public function retrieve(Request $request){
